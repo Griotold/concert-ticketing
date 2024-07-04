@@ -30,7 +30,7 @@
 {
 
         "concertId" : number,
-        "dates": [
+        "schedules": [
                 {"concertScheduleId" : number, "concertStartAt" : string},
                 {"concertScheduleId" : number, "concertStartAt" : string}
         ]
