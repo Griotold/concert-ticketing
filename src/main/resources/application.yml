@@ -1,3 +1,6 @@
+server:
+  port: 9090
+
 spring:
   output:
     ansi:
@@ -13,7 +16,7 @@ spring:
         format_sql: true
         default_batch_fetch_size: 10
   datasource:
-    url: jdbc:h2:mem:lecture
+    url: jdbc:h2:mem:concert
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -26,3 +29,4 @@ logging:
   level:
     org.hibernate:SQL: debug
     org.hibernate.orm.jdbc.bind: debug
+
