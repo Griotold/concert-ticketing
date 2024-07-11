@@ -9,4 +9,8 @@ interface QueueRepository {
     fun save(queue: Queue): Queue
 
     fun delete(queue: Queue)
+
+    fun getLastTokenId(id: Long): Long
+
+    fun findByToken(token: String): Queue?
 }

@@ -3,15 +3,12 @@ package org.griotold.concert.domain.entity
 import jakarta.persistence.*
 import org.griotold.concert.domain.type.ProgressStatus
 import java.time.LocalDateTime
+import java.util.*
 
 @Entity
 class Queue (
     member: Member,
     token: String,
-    status: ProgressStatus,
-    waitingNo: Int,
-    createdAt: LocalDateTime,
-    expiresAt: LocalDateTime,
 ){
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,15 +24,26 @@ class Queue (
         protected set
 
     @Enumerated(EnumType.STRING)
-    var status: ProgressStatus = status
+    var status: ProgressStatus = ProgressStatus.WAIT
         protected set
 
-    var waitingNo: Int = waitingNo
+    var waitingNo: Int = 0
         protected set
 
-    var createdAt : LocalDateTime = createdAt
+    var createdAt : LocalDateTime = LocalDateTime.now()
         protected set
 
-    var expiresAt : LocalDateTime = expiresAt
-        protected set
+    var enteredAt : LocalDateTime? = null
+       protected set
+
+    fun updateWaitingNo(waitingNo: Int) {
+        this.waitingNo = waitingNo
+    }
+
+    // 토큰이 ONGOING 상태가 되면 갱신
+    fun changeOngoingStatus() {
+        this.status = ProgressStatus.ONGOING
+        this.enteredAt = LocalDateTime.now()
+    }
+
 }

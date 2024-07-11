@@ -10,7 +10,7 @@ class Member (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "member_id")
-    var id: Long? = null
+    val id: Long = 0
 
     var name: String = name
         protected set
