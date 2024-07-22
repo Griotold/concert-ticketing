@@ -56,11 +56,11 @@ data class PointResponse(
 //  "paymentPrice" : number
 //  "status" : string,
 //  "paidAt" : String
-//}
+// }
 
 data class PayResponse(
     val paymentId: Long,
     val paymentPrice: Int,
-    val status : String,
-    val paidAt : String
+    val status: String,
+    val paidAt: String
 )

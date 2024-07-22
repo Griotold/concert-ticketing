@@ -29,5 +29,4 @@ class UserServiceTest {
             .isInstanceOf(UserException::class.java)
             .hasMessage("유저를 찾을 수 없습니다.")
     }
-
 }

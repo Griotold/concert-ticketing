@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-
 @WebMvcTest(UserPointController::class)
 class UserPointControllerTest() : WebTestSupport() {
     @MockBean

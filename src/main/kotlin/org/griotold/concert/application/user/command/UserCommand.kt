@@ -23,5 +23,4 @@ class UserCommand {
             if (userId <= 0) throw BadRequestException(BAD_REQUEST, "userId는 양수 값 이어야 합니다.")
         }
     }
-
 }

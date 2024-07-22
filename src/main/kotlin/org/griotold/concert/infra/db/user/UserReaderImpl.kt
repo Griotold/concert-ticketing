@@ -13,5 +13,4 @@ class UserReaderImpl(
         return userJpaRepository.findById(userId).orElse(null)
             ?.toDomain()
     }
-
 }

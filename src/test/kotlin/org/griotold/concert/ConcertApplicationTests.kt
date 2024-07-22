@@ -9,5 +9,4 @@ class ConcertApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 }

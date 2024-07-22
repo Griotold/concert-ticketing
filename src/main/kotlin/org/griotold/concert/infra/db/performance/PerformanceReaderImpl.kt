@@ -16,7 +16,7 @@ class PerformanceReaderImpl(
     private val performanceScheduleJpaRepository: PerformanceScheduleJpaRepository,
     private val seatJpaRepository: SeatJpaRepository,
 
-    ) : PerformanceReader {
+) : PerformanceReader {
     override fun getPerformanceList(pageable: Pageable): WithPage<Performance> {
         val pageRequest = PageRequest.of(pageable.pageNo - 1, pageable.pageSize)
         val result = performanceJpaRepository.findAll(pageRequest)

@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/users")
-class UserPointController (
+class UserPointController(
     private val getUserPointUseCase: GetUserPointUseCase,
     private val chargeUserPointUseCase: ChargeUserPointUseCase,
-){
+) {
     @GetMapping("/{userId}/point")
     fun getUserPoint(@PathVariable userId: Long): CommonResponse<UserResponse.Point> {
         val command = UserCommand.GetPoint(userId)
@@ -23,7 +23,7 @@ class UserPointController (
     fun chargeUserPoint(
         @PathVariable userId: Long,
         @RequestBody request: UserRequest.ChargePoint,
-    ) : CommonResponse<Unit> {
+    ): CommonResponse<Unit> {
         val command = UserCommand.ChargePoint(userId, request.amount)
         chargeUserPointUseCase(command)
         return CommonResponse.ok()

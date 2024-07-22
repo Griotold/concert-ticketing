@@ -15,7 +15,6 @@ interface SeatJpaRepository : JpaRepository<SeatEntity, Long> {
     @Query("select s from SeatEntity s where s.id =: seatId")
     fun findByIdForUpdate(seatId: Long): SeatEntity?
 
-
     /**
      * Modfying 어노테이션은 쿼리가 데이터베이스 쓰기 작업임을 스프링 데이터 JPA에 알려주는 어노테이션
      * flushAutomatically 는 메서드가 호출 될 때 영속성 컨텍스트를 자동으로 flush 하여 데이터베이스에 즉시 반영

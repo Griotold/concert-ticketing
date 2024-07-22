@@ -37,5 +37,4 @@ class PerformanceService(
     fun openSeat(seatIds: List<Long>) {
         performanceStore.openSeat(seatIds)
     }
-
 }

@@ -1,6 +1,5 @@
 package org.griotold.concert.domain.user
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.*
 import org.griotold.concert.domain.common.BadRequestException
 import org.junit.jupiter.api.Test
@@ -8,7 +7,7 @@ import org.junit.jupiter.api.Test
 class UserPointTest {
 
     @Test
-    fun `포인트를 음수로 초기화 하면 BadRequestException 이 발생한다`(){
+    fun `포인트를 음수로 초기화 하면 BadRequestException 이 발생한다`() {
         // given
 
         // when, then

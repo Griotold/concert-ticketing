@@ -8,7 +8,7 @@ import org.griotold.concert.infra.db.BaseEntity
 
 @Entity
 @Table(name = "users")
-class UserEntity (
+class UserEntity(
     val name: String,
     val point: Int,
 ) : BaseEntity() {

@@ -47,5 +47,4 @@ class UserTest {
             .isInstanceOf(UserException::class.java)
             .hasMessage("잔액이 부족합니다.")
     }
-
 }

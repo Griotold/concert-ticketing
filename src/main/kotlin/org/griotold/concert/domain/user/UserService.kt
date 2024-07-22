@@ -4,7 +4,7 @@ import org.griotold.concert.domain.common.type.TransactionType
 import org.springframework.stereotype.Service
 
 @Service
-class UserService (
+class UserService(
     private val userReader: UserReader,
     private val userStore: UserStore,
 ) {

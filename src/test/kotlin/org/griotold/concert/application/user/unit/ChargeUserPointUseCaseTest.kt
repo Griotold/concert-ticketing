@@ -1,6 +1,5 @@
 package org.griotold.concert.application.user.unit
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.*
 import org.griotold.concert.application.user.ChargeUserPointUseCase
 import org.griotold.concert.application.user.command.UserCommand

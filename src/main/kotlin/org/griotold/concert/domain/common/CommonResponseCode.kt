@@ -1,6 +1,6 @@
 package org.griotold.concert.domain.common
 
-enum class CommonResponseCode (
+enum class CommonResponseCode(
     override val code: Int,
     override val msg: String,
 ) : ResponseCode {

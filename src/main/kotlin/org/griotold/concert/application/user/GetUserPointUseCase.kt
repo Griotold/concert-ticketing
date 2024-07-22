@@ -6,7 +6,7 @@ import org.griotold.concert.domain.user.UserService
 import org.springframework.stereotype.Service
 
 @Service
-class GetUserPointUseCase (
+class GetUserPointUseCase(
     private val userService: UserService
 ) {
     operator fun invoke(command: UserCommand.GetPoint): User {

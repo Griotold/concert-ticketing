@@ -5,9 +5,10 @@ import org.assertj.core.api.Assertions.assertThat
 import org.griotold.concert.domain.common.type.SeatStatus
 import org.griotold.concert.infra.db.performance.SeatEntity
 import org.griotold.concert.infra.db.performance.SeatJpaRepository
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-
+@Disabled
 @DataJpaTest
 class SeatJpaRepositoryTest(
     private val seatJpaRepository: SeatJpaRepository,

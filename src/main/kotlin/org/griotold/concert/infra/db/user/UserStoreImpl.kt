@@ -6,7 +6,7 @@ import org.griotold.concert.domain.user.UserStore
 import org.springframework.stereotype.Repository
 
 @Repository
-class UserStoreImpl (
+class UserStoreImpl(
     private val userJpaRepository: UserJpaRepository,
     private val pointHistoryJpaRepository: PointHistoryJpaRepository
 ) : UserStore {
@@ -20,5 +20,4 @@ class UserStoreImpl (
         val pointHistoryEntity = PointHistoryEntity.of(user, userPointHistory)
         return pointHistoryJpaRepository.save(pointHistoryEntity).toDomain()
     }
-
 }

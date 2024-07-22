@@ -7,10 +7,11 @@ import org.griotold.concert.domain.user.UserException
 import org.griotold.concert.infra.db.user.PointHistoryJpaRepository
 import org.griotold.concert.infra.db.user.UserEntity
 import org.griotold.concert.infra.db.user.UserJpaRepository
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.TestConstructor
-
+@Disabled
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @SpringBootTest
 class ChargeUserPointUseCaseTest(

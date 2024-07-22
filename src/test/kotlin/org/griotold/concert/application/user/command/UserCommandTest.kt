@@ -41,4 +41,3 @@ class UserCommandTest {
             .hasMessage("amount는 양수 값 이어야 합니다.")
     }
 }
-
