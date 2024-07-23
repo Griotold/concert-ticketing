@@ -1,9 +1,9 @@
 package org.griotold.concert.application.queue
 
+import org.griotold.concert.application.UseCase
 import org.griotold.concert.domain.queue.QueueService
-import org.springframework.stereotype.Service
 
-@Service
+@UseCase
 class ActiveTokenUseCase(
     private val queueService: QueueService,
 ) {

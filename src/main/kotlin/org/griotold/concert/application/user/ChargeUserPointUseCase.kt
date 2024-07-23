@@ -1,13 +1,13 @@
 package org.griotold.concert.application.user
 
+import org.griotold.concert.application.UseCase
 import org.griotold.concert.application.user.command.UserCommand
 import org.griotold.concert.domain.user.User
 import org.griotold.concert.domain.user.UserService
-import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Transactional
-@Service
+@UseCase
 class ChargeUserPointUseCase(
     private val userService: UserService,
 ) {

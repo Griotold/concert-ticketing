@@ -1,11 +1,11 @@
 package org.griotold.concert.application.queue
 
+import org.griotold.concert.application.UseCase
 import org.griotold.concert.domain.queue.QueueService
-import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Transactional
-@Service
+@UseCase
 class ExitWaitingQueueUseCase(
     private val queueService: QueueService,
 ) {

@@ -2,24 +2,17 @@ package org.griotold.concert.application.user
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.griotold.concert.application.IntegrationTestSupport
 import org.griotold.concert.application.user.command.UserCommand
 import org.griotold.concert.domain.user.UserException
-import org.griotold.concert.infra.db.user.PointHistoryJpaRepository
 import org.griotold.concert.infra.db.user.UserEntity
 import org.griotold.concert.infra.db.user.UserJpaRepository
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.TestConstructor
-@Disabled
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@SpringBootTest
+
 class ChargeUserPointUseCaseTest(
-    // sut : System Under Test
     private val sut: ChargeUserPointUseCase,
     private val userJpaRepository: UserJpaRepository,
-    private val pointHistoryJpaRepository: PointHistoryJpaRepository,
-) {
+) : IntegrationTestSupport() {
 
     @Test
     fun `유저 포인트를 충전한다`() {

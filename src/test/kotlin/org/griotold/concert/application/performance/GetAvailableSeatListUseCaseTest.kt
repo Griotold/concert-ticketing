@@ -1,21 +1,18 @@
 package org.griotold.concert.application.performance
 
 import org.assertj.core.api.Assertions.assertThat
+import org.griotold.concert.application.IntegrationTestSupport
 import org.griotold.concert.domain.common.type.SeatStatus
 import org.griotold.concert.infra.db.performance.*
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.TestConstructor
 import java.time.LocalDateTime
 
-@SpringBootTest
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 class GetAvailableSeatListUseCaseTest(
     private val sut: GetAvailableSeatListUseCase,
     private val performanceJpaRepository: PerformanceJpaRepository,
     private val performanceScheduleJpaRepository: PerformanceScheduleJpaRepository,
     private val seatJpaRepository: SeatJpaRepository,
-) {
+) : IntegrationTestSupport() {
 
     @Test
     fun `예약 가능한 좌석 리스트를 조회한다`() {

@@ -1,14 +1,13 @@
 package org.griotold.concert.application.reservation
 
+import org.griotold.concert.application.UseCase
 import org.griotold.concert.application.reservation.command.ReservationCommand
 import org.griotold.concert.domain.performance.PerformanceService
-import org.griotold.concert.domain.reservation.Reservation
 import org.griotold.concert.domain.reservation.ReservationService
-import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Transactional
-@Service
+@UseCase
 class PerformanceSeatReservationUseCase(
     private val performanceService: PerformanceService,
     private val reservationService: ReservationService

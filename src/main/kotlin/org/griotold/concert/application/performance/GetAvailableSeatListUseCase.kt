@@ -1,10 +1,10 @@
 package org.griotold.concert.application.performance
 
+import org.griotold.concert.application.UseCase
 import org.griotold.concert.domain.performance.PerformanceService
 import org.griotold.concert.domain.performance.Seat
-import org.springframework.stereotype.Service
 
-@Service
+@UseCase
 class GetAvailableSeatListUseCase(
     private val performanceService: PerformanceService
 ) {
