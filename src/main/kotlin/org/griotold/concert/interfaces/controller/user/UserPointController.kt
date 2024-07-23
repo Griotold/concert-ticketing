@@ -12,16 +12,16 @@ class UserPointController(
     private val getUserPointUseCase: GetUserPointUseCase,
     private val chargeUserPointUseCase: ChargeUserPointUseCase,
 ) {
-    @GetMapping("/{userId}/point")
-    fun getUserPoint(@PathVariable userId: Long): CommonResponse<UserResponse.Point> {
+    @GetMapping("/{user-id}/point")
+    fun getUserPoint(@PathVariable("user-id") userId: Long): CommonResponse<UserResponse.Point> {
         val command = UserCommand.GetPoint(userId)
         val result = getUserPointUseCase(command)
         return CommonResponse.ok(UserResponse.Point.toResponse(result))
     }
 
-    @PutMapping("/{userId}/point")
+    @PutMapping("/{user-id}/point")
     fun chargeUserPoint(
-        @PathVariable userId: Long,
+        @PathVariable("user-id") userId: Long,
         @RequestBody request: UserRequest.ChargePoint,
     ): CommonResponse<Unit> {
         val command = UserCommand.ChargePoint(userId, request.amount)

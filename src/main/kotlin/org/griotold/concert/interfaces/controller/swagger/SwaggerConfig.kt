@@ -12,6 +12,6 @@ class SwaggerConfig {
     fun modelResolver(
         objectMapper: ObjectMapper,
     ): ModelResolver {
-        return modelResolver(objectMapper)
+        return ModelResolver(objectMapper)
     }
 }

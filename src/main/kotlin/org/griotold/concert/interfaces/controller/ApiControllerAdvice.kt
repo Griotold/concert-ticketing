@@ -1,5 +1,6 @@
 package org.griotold.concert.interfaces.controller
 
+import org.griotold.concert.domain.common.BadRequestException
 import org.griotold.concert.domain.common.CommonException
 import org.griotold.concert.domain.common.CustomException
 import org.griotold.concert.domain.performance.PerformanceException
@@ -11,15 +12,16 @@ import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.RestControllerAdvice
 
-@RestController
+@RestControllerAdvice
 class ApiControllerAdvice {
     val log: Logger = LoggerFactory.getLogger(ApiControllerAdvice::class.java)
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(
         CommonException::class,
+        BadRequestException::class,
         UserException::class,
         PerformanceException::class,
         ReservationException::class,
