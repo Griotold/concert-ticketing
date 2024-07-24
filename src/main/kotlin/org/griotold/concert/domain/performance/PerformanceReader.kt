@@ -12,4 +12,7 @@ interface PerformanceReader {
     fun getAvailableSeatList(performanceScheduleId: Long): List<Seat>
 
     fun getSeatWithLock(seatId: Long): Seat?
+
+    // 낙관적 락
+    fun getSeat(seatId: Long): Seat?
 }

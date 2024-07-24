@@ -8,6 +8,7 @@ import org.griotold.concert.domain.performance.Performance
 import org.griotold.concert.domain.performance.PerformanceReader
 import org.griotold.concert.domain.performance.Seat
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -16,7 +17,7 @@ class PerformanceReaderImpl(
     private val performanceScheduleJpaRepository: PerformanceScheduleJpaRepository,
     private val seatJpaRepository: SeatJpaRepository,
 
-) : PerformanceReader {
+    ) : PerformanceReader {
     override fun getPerformanceList(pageable: Pageable): WithPage<Performance> {
         val pageRequest = PageRequest.of(pageable.pageNo - 1, pageable.pageSize)
         val result = performanceJpaRepository.findAll(pageRequest)
@@ -52,5 +53,12 @@ class PerformanceReaderImpl(
     override fun getSeatWithLock(seatId: Long): Seat? {
         return seatJpaRepository.findByIdForUpdate(seatId)
             ?.toDomain()
+    }
+
+    // 낙관적 락
+    override fun getSeat(seatId: Long): Seat? {
+        return seatJpaRepository.findByIdOrNull(seatId)
+            ?.toDomain()
+
     }
 }

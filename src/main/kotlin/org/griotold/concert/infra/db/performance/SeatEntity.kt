@@ -29,6 +29,9 @@ class SeatEntity(
     @Embedded
     val softDeletion: SoftDeletion = SoftDeletion()
 
+    @Version // 엔티티의 버젼을 관리 --> 낙관적 락
+    var version: Long = 0
+
     companion object {
         fun of(seat: Seat): SeatEntity {
             return SeatEntity(

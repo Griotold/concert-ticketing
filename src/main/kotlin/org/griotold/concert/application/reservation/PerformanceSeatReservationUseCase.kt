@@ -13,8 +13,9 @@ class PerformanceSeatReservationUseCase(
     private val reservationService: ReservationService
 ) {
 
+    // 낙관적락 사용
     operator fun invoke(command: ReservationCommand.Reserve) {
-        val seat = performanceService.getSeatWithLock(command.seatId)
+        val seat = performanceService.getSeat(command.seatId)
         performanceService.reserve(seat)
         reservationService.reserve(command.userId, command.seatId, seat.price)
     }
