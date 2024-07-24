@@ -11,6 +11,7 @@ interface SeatJpaRepository : JpaRepository<SeatEntity, Long> {
 
     fun findByPerformanceScheduleIdAndStatus(scheduleId: Long, status: SeatStatus): List<SeatEntity>
 
+    // 비관적락
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select s from SeatEntity s where s.id =:seatId")
     fun findByIdForUpdate(seatId: Long): SeatEntity?
