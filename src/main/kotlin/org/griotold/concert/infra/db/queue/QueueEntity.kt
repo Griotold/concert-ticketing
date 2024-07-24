@@ -3,11 +3,13 @@ package org.griotold.concert.infra.db.queue
 import jakarta.persistence.*
 import org.griotold.concert.domain.common.type.QueueStatus
 import org.griotold.concert.domain.queue.WaitingQueue
-import org.griotold.concert.infra.db.BaseEntity
+import org.griotold.concert.infra.db.common.Audit
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
 
 @Entity
 @Table(name = "queue")
+@EntityListeners(AuditingEntityListener::class)
 class QueueEntity(
     @Column(unique = true)
     val token: String,
@@ -15,7 +17,14 @@ class QueueEntity(
     @Enumerated(EnumType.STRING)
     val status: QueueStatus,
     val expiredAt: LocalDateTime? = null,
-) : BaseEntity() {
+) {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long = 0
+
+    @Embedded
+    val audit: Audit = Audit()
 
     companion object {
 

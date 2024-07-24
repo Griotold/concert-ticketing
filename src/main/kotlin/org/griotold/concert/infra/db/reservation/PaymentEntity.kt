@@ -1,18 +1,30 @@
 package org.griotold.concert.infra.db.reservation
 
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import org.griotold.concert.domain.common.type.PaymentStatus
 import org.griotold.concert.domain.reservation.Payment
-import org.griotold.concert.infra.db.BaseEntity
+import org.griotold.concert.infra.db.common.Audit
+import org.griotold.concert.infra.db.common.SoftDeletion
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 
 @Entity
 @Table(name = "payment")
+@EntityListeners(AuditingEntityListener::class)
 class PaymentEntity(
     val reservationId: Long,
     val price: Int,
     val status: PaymentStatus,
-) : BaseEntity() {
+) {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long = 0
+
+    @Embedded
+    val audit: Audit = Audit()
+
+    @Embedded
+    val softDeletion: SoftDeletion = SoftDeletion()
 
     companion object {
 

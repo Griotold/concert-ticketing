@@ -1,16 +1,16 @@
 package org.griotold.concert.infra.db.user
 
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import org.griotold.concert.domain.common.type.TransactionType
 import org.griotold.concert.domain.user.User
 import org.griotold.concert.domain.user.UserPointHistory
-import org.griotold.concert.infra.db.BaseEntity
+import org.griotold.concert.infra.db.common.Audit
+import org.griotold.concert.infra.db.common.SoftDeletion
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 
 @Entity
 @Table(name = "point_history")
+@EntityListeners(AuditingEntityListener::class)
 class PointHistoryEntity(
     val userId: Long,
 
@@ -18,7 +18,17 @@ class PointHistoryEntity(
     val type: TransactionType,
 
     val amount: Int,
-) : BaseEntity() {
+) {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long = 0
+
+    @Embedded
+    val audit: Audit = Audit()
+
+    @Embedded
+    val softDeletion: SoftDeletion = SoftDeletion()
 
     companion object {
 

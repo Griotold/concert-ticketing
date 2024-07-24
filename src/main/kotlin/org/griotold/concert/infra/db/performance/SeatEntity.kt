@@ -1,15 +1,15 @@
 package org.griotold.concert.infra.db.performance
 
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import org.griotold.concert.domain.common.type.SeatStatus
 import org.griotold.concert.domain.performance.Seat
-import org.griotold.concert.infra.db.BaseEntity
+import org.griotold.concert.infra.db.common.Audit
+import org.griotold.concert.infra.db.common.SoftDeletion
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 
 @Entity
 @Table(name = "seat")
+@EntityListeners(AuditingEntityListener::class)
 class SeatEntity(
     val performanceScheduleId: Long,
     val seatNo: Int,
@@ -17,7 +17,17 @@ class SeatEntity(
 
     @Enumerated(EnumType.STRING)
     val status: SeatStatus,
-) : BaseEntity() {
+) {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long = 0
+
+    @Embedded
+    val audit: Audit = Audit()
+
+    @Embedded
+    val softDeletion: SoftDeletion = SoftDeletion()
 
     companion object {
         fun of(seat: Seat): SeatEntity {

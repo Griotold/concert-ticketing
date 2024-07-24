@@ -1,4 +1,4 @@
-package org.griotold.concert.infra.db
+package org.griotold.concert.infra.db.common
 
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate

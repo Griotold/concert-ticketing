@@ -1,17 +1,16 @@
 package org.griotold.concert.infra.db.reservation
 
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
-import jakarta.persistence.Table
-import jakarta.persistence.Version
+import jakarta.persistence.*
 import org.griotold.concert.domain.common.type.ReservationStatus
 import org.griotold.concert.domain.reservation.Reservation
-import org.griotold.concert.infra.db.BaseEntity
+import org.griotold.concert.infra.db.common.Audit
+import org.griotold.concert.infra.db.common.SoftDeletion
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
 
 @Entity
 @Table(name = "reservation")
+@EntityListeners(AuditingEntityListener::class)
 class ReservationEntity(
     val userId: Long,
     val seatId: Long,
@@ -20,7 +19,17 @@ class ReservationEntity(
     @Enumerated(EnumType.STRING)
     val status: ReservationStatus,
     val expiredAt: LocalDateTime
-) : BaseEntity() {
+) {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long = 0
+
+    @Embedded
+    val audit: Audit = Audit()
+
+    @Embedded
+    val softDeletion: SoftDeletion = SoftDeletion()
 
     @Version // 엔티티의 버젼을 관리 --> 낙관적 락
     var version: Long = 0
