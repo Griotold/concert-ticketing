@@ -15,8 +15,12 @@ class IntegrationTestSupport {
     @Autowired
     lateinit var dbCleanup: DbCleanup
 
+//    @Autowired
+//    lateinit var redisConnectionFactory: RedisConnectionFactory
+
     @BeforeEach
     fun setup() {
         dbCleanup.execute()
+//        redisConnectionFactory.connection.commands().flushAll()
     }
 }

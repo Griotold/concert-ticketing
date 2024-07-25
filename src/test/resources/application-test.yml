@@ -19,6 +19,11 @@ spring:
     show-sql: true
     defer-datasource-initialization: true
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
   sql:
     init:
       mode: never

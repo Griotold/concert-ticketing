@@ -1,6 +1,6 @@
 package org.griotold.concert.application.user
 
-import org.griotold.concert.application.UseCase
+import org.griotold.concert.application.common.UseCase
 import org.griotold.concert.application.user.command.UserCommand
 import org.griotold.concert.domain.user.User
 import org.griotold.concert.domain.user.UserService

@@ -21,7 +21,7 @@ class PerformanceSeatReservationUseCaseTest(
 ) : IntegrationTestSupport() {
 
     @Test
-    fun `좌석 예약 동시성 테스트 3,000명 낙관적락`() {
+    fun `좌석 예약 동시성 테스트 3,000명 분산락 Redisson`() {
         // given
         val seatEntity = SeatEntity(
             performanceScheduleId = 1L,
