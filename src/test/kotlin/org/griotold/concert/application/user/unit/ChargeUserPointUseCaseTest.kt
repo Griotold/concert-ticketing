@@ -32,14 +32,14 @@ class ChargeUserPointUseCaseTest {
 
         val command = UserCommand.ChargePoint(1L, 10000)
 
-        given(userService.getUser(1L)).willReturn(findUser)
+        given(userService.getUserWithLock(1L)).willReturn(findUser)
         given(userService.chargePoint(findUser, 10000)).willReturn(afterCharge)
 
         // when
         val result = sut(command)
 
         // then
-        verify(userService, times(1)).getUser(1L)
+        verify(userService, times(1)).getUserWithLock(1L)
         verify(userService, times(1)).chargePoint(findUser, 10000)
 
         assertThat(result.userId).isEqualTo(1L)

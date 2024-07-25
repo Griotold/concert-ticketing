@@ -12,12 +12,9 @@ class ChargeUserPointUseCase(
     private val userService: UserService,
 ) {
 
-    /**
-     * 코틀린에서 invoke 메서드를 정의하면, 클래스의 인스턴스를 함수처럼 호출할 수 있다.
-     * chargeUserPointUseCase(command) 이런식으로
-     * */
+    // 비관적락 걸기
     operator fun invoke(command: UserCommand.ChargePoint): User {
-        val user = userService.getUser(command.userId)
+        val user = userService.getUserWithLock(command.userId)
         return userService.chargePoint(user, command.amount)
     }
 }
