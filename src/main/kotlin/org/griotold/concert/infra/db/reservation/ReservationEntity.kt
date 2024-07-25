@@ -31,7 +31,8 @@ class ReservationEntity(
     @Embedded
     val softDeletion: SoftDeletion = SoftDeletion()
 
-    @Version // 엔티티의 버젼을 관리 --> 낙관적 락
+    // 엔티티의 버젼을 관리 --> 낙관적 락
+    @Version
     var version: Long = 0
 
     companion object {
