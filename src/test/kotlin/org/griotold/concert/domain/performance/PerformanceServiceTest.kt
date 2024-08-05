@@ -82,9 +82,10 @@ class PerformanceServiceTest {
             status = SeatStatus.OPEN,
         )
         val reservedSeat = seat.copy(status = SeatStatus.RESERVED)
+        val userId = 1L
 
         // when
-        sut.reserve(seat)
+        sut.reserve(seat, userId, seat.seatId, seat.price)
 
         // then
         verify(performanceStore, times(1)).save(reservedSeat)
