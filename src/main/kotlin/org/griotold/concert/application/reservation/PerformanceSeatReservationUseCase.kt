@@ -8,18 +8,18 @@ import org.griotold.concert.domain.performance.Seat
 import org.griotold.concert.domain.reservation.ReservationService
 import org.springframework.transaction.annotation.Transactional
 
-@Transactional
+//@Transactional
 @UseCase
 class PerformanceSeatReservationUseCase(
     private val performanceService: PerformanceService,
-    private val reservationService: ReservationService
 ) {
 
 
     operator fun invoke(command: ReservationCommand.Reserve) {
         val seat = getSeat(command.seatId)
-        performanceService.reserve(seat)
-        reservationService.reserve(command.userId, command.seatId, seat.price)
+
+        // 좌석 상태 변경하고, 예약 생성
+        performanceService.reserve(seat, command.seatId, command.seatId, seat.price)
     }
 
     // 분산 락 여기에만 적용!
