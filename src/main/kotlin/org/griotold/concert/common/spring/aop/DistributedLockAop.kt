@@ -1,4 +1,4 @@
-package org.griotold.concert.aop
+package org.griotold.concert.common.spring.aop
 
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
@@ -21,7 +21,7 @@ class DistributedLockAop(
         private val log = LoggerFactory.getLogger(DistributedLockAop::class.java)
     }
 
-    @Around("@annotation(org.griotold.concert.aop.DistributedLock)")
+    @Around("@annotation(org.griotold.concert.common.spring.aop.DistributedLock)")
     @Throws(Throwable::class)
     fun lock(joinPoint: ProceedingJoinPoint): Any? {
         val signature = joinPoint.signature as MethodSignature

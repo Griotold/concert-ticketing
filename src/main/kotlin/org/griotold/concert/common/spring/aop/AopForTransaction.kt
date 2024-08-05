@@ -1,4 +1,4 @@
-package org.griotold.concert.aop
+package org.griotold.concert.common.spring.aop
 
 import org.aspectj.lang.ProceedingJoinPoint
 import org.springframework.stereotype.Component

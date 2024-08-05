@@ -1,4 +1,4 @@
-package org.griotold.concert.aop
+package org.griotold.concert.common.spring.aop
 
 import org.springframework.expression.ExpressionParser
 import org.springframework.expression.spel.standard.SpelExpressionParser
