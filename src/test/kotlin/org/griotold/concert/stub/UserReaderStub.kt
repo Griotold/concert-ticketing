@@ -8,4 +8,8 @@ class UserReaderStub : UserReader {
     override fun getUser(userId: Long): User {
         return User(1L, "유저1", UserPoint(10000))
     }
+
+    override fun getUserWithLock(userId: Long): User? {
+        return User(1L, "유저1", UserPoint(10000))
+    }
 }

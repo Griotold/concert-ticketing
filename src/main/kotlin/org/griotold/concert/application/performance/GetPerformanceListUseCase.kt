@@ -1,6 +1,6 @@
 package org.griotold.concert.application.performance
 
-import org.griotold.concert.application.UseCase
+import org.griotold.concert.application.common.UseCase
 import org.griotold.concert.domain.common.Pageable
 import org.griotold.concert.domain.common.WithPage
 import org.griotold.concert.domain.performance.Performance

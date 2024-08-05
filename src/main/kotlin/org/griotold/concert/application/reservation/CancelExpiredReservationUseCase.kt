@@ -1,6 +1,6 @@
 package org.griotold.concert.application.reservation
 
-import org.griotold.concert.application.UseCase
+import org.griotold.concert.application.common.UseCase
 import org.griotold.concert.domain.performance.PerformanceService
 import org.griotold.concert.domain.reservation.ReservationService
 import org.springframework.transaction.annotation.Transactional

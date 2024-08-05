@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import java.time.LocalDateTime
+import java.util.concurrent.CompletableFuture.allOf
+import java.util.concurrent.CompletableFuture.runAsync
 
 class ReservationPaymentUseCaseTest(
     private val sut: ReservationPaymentUseCase,
@@ -192,5 +194,42 @@ class ReservationPaymentUseCaseTest(
         assertThatThrownBy { sut(command) }
             .isInstanceOf(UserException::class.java)
             .hasMessage("잔액이 부족합니다.")
+    }
+
+    @Test
+    fun `좌석 결제 동시성 테스트 10번 시도 하면 딱 1번만 성공`() {
+        // given
+        val userEntity = UserEntity(
+            name = "유저",
+            point = 100000,
+        )
+        userJpaRepository.save(userEntity)
+
+        val expired = LocalDateTime.now().plusMinutes(5)
+        val reservationEntity = ReservationEntity(
+            userId = 1L,
+            seatId = 1L,
+            price = 10000,
+            status = ReservationStatus.RESERVED,
+            expiredAt = expired,
+        )
+        reservationJpaRepository.save(reservationEntity)
+
+        // when
+        val trialCount = 10
+        val futures = Array(trialCount) { i ->
+            runAsync { sut(ReservationCommand.Pay(userId = 1L, reservationId = 1L)) }
+        }
+
+        allOf(*futures)
+            .exceptionally {
+                println(it.localizedMessage)
+                null
+            }
+            .join()
+
+        // then
+        val errorCount = futures.count { it.isCompletedExceptionally }
+        assertThat(errorCount).isEqualTo(trialCount - 1)
     }
 }

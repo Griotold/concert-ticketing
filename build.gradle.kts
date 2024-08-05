@@ -30,7 +30,10 @@ jacoco {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    // implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+    // redisson - 분산락 pub/sub 방식
+    implementation("org.redisson:redisson-spring-boot-starter:3.18.0")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
     // swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
@@ -52,7 +55,7 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
-    // testImplementation("com.github.codemonstur:embedded-redis:1.0.0")
+    testImplementation("com.github.codemonstur:embedded-redis:1.0.0")
 
     // test container
     testImplementation("org.testcontainers:testcontainers:1.19.8")

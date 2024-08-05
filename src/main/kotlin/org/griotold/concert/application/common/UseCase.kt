@@ -1,4 +1,4 @@
-package org.griotold.concert.application
+package org.griotold.concert.application.common
 
 import org.springframework.stereotype.Component
 

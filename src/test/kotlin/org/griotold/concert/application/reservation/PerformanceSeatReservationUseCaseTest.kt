@@ -11,12 +11,44 @@ import org.griotold.concert.infra.db.performance.SeatEntity
 import org.griotold.concert.infra.db.performance.SeatJpaRepository
 import org.griotold.concert.infra.db.reservation.ReservationJpaRepository
 import org.junit.jupiter.api.Test
+import java.util.concurrent.CompletableFuture.allOf
+import java.util.concurrent.CompletableFuture.runAsync
 
 class PerformanceSeatReservationUseCaseTest(
     private val sut: PerformanceSeatReservationUseCase,
     private val seatJpaRepository: SeatJpaRepository,
     private val reservationJpaRepository: ReservationJpaRepository,
 ) : IntegrationTestSupport() {
+
+    @Test
+    fun `좌석 예약 동시성 테스트 3,000명 분산락 Redisson`() {
+        // given
+        val seatEntity = SeatEntity(
+            performanceScheduleId = 1L,
+            seatNo = 1,
+            price = 10000,
+            SeatStatus.OPEN
+        )
+        seatJpaRepository.save(seatEntity)
+
+        // when
+        val userCount = 3_000
+        val futures = Array(userCount) { i ->
+            runAsync { sut(ReservationCommand.Reserve(userId = i.toLong() + 1, seatId = 1L)) }
+        }
+
+        allOf(*futures)
+            .exceptionally { null }
+            .join()
+
+        // then
+        val errorCount = futures.count { it.isCompletedExceptionally }
+        assertThat(errorCount).isEqualTo(userCount - 1)
+
+        val reservationCount = reservationJpaRepository.count()
+        assertThat(reservationCount).isEqualTo(1)
+    }
+
 
     @Test
     fun `좌석을 예약할 수 있다`() {

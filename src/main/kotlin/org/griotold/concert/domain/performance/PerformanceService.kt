@@ -37,4 +37,10 @@ class PerformanceService(
     fun openSeat(seatIds: List<Long>) {
         performanceStore.openSeat(seatIds)
     }
+
+    // 낙관적락
+    fun getSeat(seatId: Long): Seat {
+        return performanceReader.getSeat(seatId)
+            ?: throw PerformanceException(PERFORMANCE_SEAT_NOT_FOUND)
+    }
 }

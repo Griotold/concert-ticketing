@@ -33,4 +33,9 @@ class UserService(
 
         return used
     }
+
+    fun getUserWithLock(userId: Long): User {
+        return userReader.getUserWithLock(userId)
+            ?: throw UserException(UserResponseCode.NOT_FOUND_USER)
+    }
 }
