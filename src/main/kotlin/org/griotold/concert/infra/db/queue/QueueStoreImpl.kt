@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
-@Repository
+//@Repository
 class QueueStoreImpl(
     private val queueJpaRepository: QueueJpaRepository,
 ) : QueueStore {

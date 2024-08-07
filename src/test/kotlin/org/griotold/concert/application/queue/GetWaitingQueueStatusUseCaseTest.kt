@@ -8,35 +8,35 @@ import org.griotold.concert.domain.queue.QueueException
 import org.griotold.concert.infra.db.queue.QueueEntity
 import org.griotold.concert.infra.db.queue.QueueJpaRepository
 import org.junit.jupiter.api.Test
+import org.springframework.data.redis.core.RedisTemplate
 import java.util.*
 
 class GetWaitingQueueStatusUseCaseTest(
     private val sut: GetWaitingQueueStatusUseCase,
-    private val queueJpaRepository: QueueJpaRepository,
+    private val redisTemplate: RedisTemplate<String, String>,
 ) : IntegrationTestSupport() {
 
     @Test
     fun `토큰 상태를 조회한다`() {
         // given
-        queueJpaRepository.save(QueueEntity(token = UUID.randomUUID().toString(), status = QueueStatus.WAITING))
-        queueJpaRepository.save(QueueEntity(token = UUID.randomUUID().toString(), status = QueueStatus.WAITING))
-
+        val waitQueueKey = "queue:wait"
         val token = UUID.randomUUID().toString()
-        queueJpaRepository.save(QueueEntity(token = token, status = QueueStatus.WAITING))
+        val score = System.currentTimeMillis().toDouble()
+        redisTemplate.opsForZSet().add(waitQueueKey, UUID.randomUUID().toString(), score)
+        redisTemplate.opsForZSet().add(waitQueueKey, UUID.randomUUID().toString(), score + 1)
+        redisTemplate.opsForZSet().add(waitQueueKey, token, score + 2)
 
         // when
         val result = sut(token)
 
         // then
-        assertThat(result.queueId).isEqualTo(3L)
-        assertThat(result.rank).isEqualTo(2)
+        assertThat(result.rank).isEqualTo(3)
         assertThat(result.status).isEqualTo(QueueStatus.WAITING)
         assertThat(result.token).isEqualTo(token)
-        assertThat(result.expiredAt).isNull()
     }
 
     @Test
-    fun `토큰 상태를 조회 시 해당 토큰이 없으면 QueueException 발생한다`() {
+    fun `토큰 상태를 조회 시 해당 토큰이 없으면 QueueException 이 발생한다`() {
         // given
         val token = UUID.randomUUID().toString()
 

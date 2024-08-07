@@ -5,7 +5,7 @@ import org.griotold.concert.domain.queue.QueueReader
 import org.griotold.concert.domain.queue.WaitingQueue
 import org.springframework.stereotype.Repository
 
-@Repository
+//@Repository
 class QueueReaderImpl(
     private val queueJpaRepository: QueueJpaRepository,
 ) : QueueReader {
