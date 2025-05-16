@@ -41,6 +41,9 @@
 - 결제 완료 시 좌석 예약 확정
 - 결제 완료 또는 예약 활동 종료 시 대기열에서 제거
 
+# ERD
+![image](https://github.com/user-attachments/assets/302c79cb-fa03-4159-8ba1-0205510fbd9f)
+
 # 기술 스택
 
 ## 백엔드
